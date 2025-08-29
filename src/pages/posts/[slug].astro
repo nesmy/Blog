@@ -1,0 +1,33 @@
+---
+import Base from "@/layouts/BaseLayout.astro"
+import { getEntry, getCollection } from "astro:content"
+import type { CollectionEntry } from "astro:content"
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts')
+  // Return a string slug for a single param route
+  return posts.map(p => ({ params: { slug: p.slug } }))
+}
+
+const { slug = "" } = Astro.params
+const post = await getEntry('posts', slug) as CollectionEntry<'posts'> | undefined
+if (!post) {
+  throw new Error(`Post not found: ${slug}`)
+}
+
+const { Content } = await post.render()
+---
+
+<Base title={`${post.data.title} — Compile & Play`} description={post.data.description}>
+  <article class="prose prose-invert max-w-none">
+    <h1>{post.data.title}</h1>
+    <p class="text-sm text-zinc-400">
+      {post.data.published.toLocaleDateString()} • <span class="badge">{post.data.tag}</span>
+    </p>
+    {post.data.image && (
+      <img src={post.data.image} alt={post.data.title} class="my-6 rounded-xl border border-zinc-800" />
+    )}
+    <Content />
+  </article>
+</Base>
+

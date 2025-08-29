@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+const { title = "Compile & Play", description = "Devlogs, Gaming, and Future Tech" } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-zinc-950 text-zinc-200 selection:bg-indigo-600/40 selection:text-white">
+    <header class="sticky top-0 z-50 border-b border-zinc-800/80 backdrop-blur bg-zinc-950/70">
+      <nav class="container flex items-center h-14 gap-6">
+        <a href="/" class="text-lg font-semibold tracking-tight">Compile <span class="text-indigo-400">&</span> Play</a>
+        <div class="ml-auto flex items-center gap-4 text-sm">
+          <a class="hover:text-white" href="/">Home</a>
+          <a class="hover:text-white" href="/devlogs">Devlogs</a>
+          <a class="hover:text-white" href="/gaming">Gaming</a>
+          <a class="hover:text-white" href="/tech">Tech</a>
+          <a class="hover:text-white" href="/about">About Me</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container py-10">
+      <slot />
+    </main>
+
+    <footer class="border-t border-zinc-800/80 py-10 mt-16">
+      <div class="container flex flex-col md:flex-row items-center gap-3 text-sm text-zinc-400">
+        <div>© {new Date().getFullYear()} Compile & Play — Built by Nesmy</div>
+        <div class="md:ml-auto flex items-center gap-5">
+          <a class="hover:text-white" href="https://github.com/" rel="noopener">GitHub</a>
+          <a class="hover:text-white" href="https://x.com/" rel="noopener">Twitter/X</a>
+          <a class="hover:text-white" href="https://youtube.com/" rel="noopener">YouTube</a>
+          <a class="hover:text-white" href="https://nesmy.dev" rel="noopener">nesmy.dev</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

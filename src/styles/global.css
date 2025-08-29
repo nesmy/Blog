@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root { color-scheme: dark; }
+
+/* Custom utilities */
+.container {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+.card {
+  @apply rounded-2xl bg-zinc-900/70 border border-zinc-800 shadow-lg;
+}
+.btn {
+  @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium border border-zinc-700 hover:border-zinc-500;
+}
+.btn-primary {
+  @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 font-medium
+         border border-zinc-700 hover:border-zinc-500
+         bg-indigo-600/20 hover:bg-indigo-600/30;
+}
+.badge {
+  @apply inline-flex items-center text-xs font-semibold px-2 py-1 rounded-full bg-zinc-800 border border-zinc-700;
+}
+.prose-invert {
+  /* ensure typography plugin looks good in dark mode */
+  --tw-prose-body: theme(colors.zinc.300);
+  --tw-prose-headings: theme(colors.zinc.50);
+  --tw-prose-links: theme(colors.indigo.300);
+}

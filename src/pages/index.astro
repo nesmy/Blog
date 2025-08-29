@@ -1,0 +1,48 @@
+---
+import Base from "@/layouts/BaseLayout.astro"
+import Hero from "@/components/Hero.astro"
+import FeaturedCard from "@/components/FeaturedCard.astro"
+import PostCard from "@/components/PostCard.astro"
+import Newsletter from "@/components/Newsletter.astro"
+import AboutMini from "@/components/AboutMini.astro"
+import { getCollection } from "astro:content"
+
+const posts = await getCollection('posts')
+const byDate = posts.toSorted((a,b) => b.data.published.getTime() - a.data.published.getTime())
+const featured = byDate.filter(p => p.data.featured).slice(0,3)
+const latest = byDate[0]
+---
+<Base title="Compile & Play — Devlogs, Gaming & Tech">
+  <Hero latestHref={latest ? `/posts/${latest.slug}/` : '/'} aboutHref="/about" />
+
+  <section class="grid md:grid-cols-3 gap-5 md:gap-6">
+    {featured.map(p => (
+      <FeaturedCard
+        href={`/posts/${p.slug}/`}
+        title={p.data.title}
+        tag={p.data.tag}
+        image={p.data.image}
+        description={p.data.description}
+      />
+    ))}
+  </section>
+
+  <h2 class="mt-12 text-2xl font-bold">Blog Feed</h2>
+  <div class="mt-4 space-y-1">
+    {byDate.map(p => (
+      <PostCard
+        href={`/posts/${p.slug}/`}
+        title={p.data.title}
+        date={p.data.published.toISOString()}
+        tag={p.data.tag}
+        image={p.data.image}
+        description={p.data.description}
+      />
+    ))}
+  </div>
+
+  <div class="mt-12 grid md:grid-cols-2 gap-6">
+    <Newsletter />
+    <AboutMini />
+  </div>
+</Base>
