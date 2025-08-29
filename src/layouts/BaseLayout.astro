@@ -1,12 +1,14 @@
 ---
 import "../styles/global.css";
 const { title = "Debug & Play", description = "Devlogs, Gaming, and Future Tech" } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" />
     <title>{title}</title>
   </head>
