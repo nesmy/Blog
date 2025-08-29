@@ -5,7 +5,7 @@ import { getCollection } from "astro:content"
 const posts = await getCollection('posts')
 const filtered = posts.filter(p => p.data.tag === "tech").toSorted((a,b) => b.data.published.getTime() - a.data.published.getTime())
 ---
-<Base title="Tech — Compile & Play">
+<Base title="Tech — Debug & Play">
   <h1 class="text-3xl font-extrabold">Tech</h1>
   <div class="mt-6 space-y-1">
     {filtered.map(p => (

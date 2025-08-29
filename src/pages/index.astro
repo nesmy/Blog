@@ -12,7 +12,7 @@ const byDate = posts.toSorted((a,b) => b.data.published.getTime() - a.data.publi
 const featured = byDate.filter(p => p.data.featured).slice(0,3)
 const latest = byDate[0]
 ---
-<Base title="Compile & Play — Devlogs, Gaming & Tech">
+<Base title="Debug & Play — Devlogs, Gaming & Tech">
   <Hero latestHref={latest ? `/posts/${latest.slug}/` : '/'} aboutHref="/about" />
 
   <section class="grid md:grid-cols-3 gap-5 md:gap-6">
